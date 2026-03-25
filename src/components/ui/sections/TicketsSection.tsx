@@ -34,40 +34,53 @@ export function TicketsSection() {
     <section
       ref={sectionRef}
       id="tickets"
-      className="relative py-24 lg:py-32"
+      className="relative py-28 lg:py-36"
     >
+      <div className="section-divider" />
+
       <Container>
         <div
           ref={contentRef}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bg-elevated to-bg-secondary border border-white/[0.06] p-8 lg:p-16 text-center"
+          className="relative overflow-hidden rounded-3xl p-[1px] pt-12"
+          style={{
+            background: 'linear-gradient(135deg, rgba(98,126,234,0.2), rgba(197,165,90,0.15), rgba(98,126,234,0.1))',
+          }}
         >
-          {/* Background glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-eth-purple/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="relative rounded-3xl bg-bg-primary p-10 lg:p-20 text-center overflow-hidden">
+            {/* Background orbs */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-eth-purple/[0.06] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-[400px] h-[250px] bg-ankara-gold/[0.04] rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10">
-            <h2
-              className="font-display font-bold tracking-[-0.01em]"
-              style={{ fontSize: 'clamp(1.5rem, 3vw, 3rem)' }}
-            >
-              Yerinizi <span className="gradient-text">Ayırtın</span>
-            </h2>
-            <p className="mt-4 text-text-secondary text-base lg:text-lg max-w-xl mx-auto">
-              {EVENT_DATE} &bull; {EVENT_LOCATION}
-            </p>
-
-            <div className="mt-10 max-w-md mx-auto p-8 rounded-2xl bg-bg-primary/50 border border-white/[0.06]">
-              <div className="text-ankara-gold font-display font-semibold text-lg mb-2">
+            <div className="relative z-10">
+              <span className="inline-block px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.15em] uppercase text-eth-purple-light bg-eth-purple/[0.08] border border-eth-purple/15 mb-6">
                 Biletler
-              </div>
-              <p className="text-text-secondary text-sm mb-6">
-                Bilet satışları yakında başlayacak. Haberdar olmak için bizi takip edin.
+              </span>
+              <h2
+                className="font-display font-bold tracking-[-0.02em] leading-tight"
+                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}
+              >
+                Yerinizi{' '}
+                <span className="gradient-text">Ayırtın</span>
+              </h2>
+              <p className="mt-5 text-text-secondary text-base lg:text-lg max-w-xl mx-auto">
+                {EVENT_DATE} &bull; {EVENT_LOCATION}
               </p>
 
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-eth-purple/10 border border-eth-purple/20 text-eth-purple text-sm font-medium">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M4 8h8M8 4v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                Yakında Açılacak
+              <div className="mt-12 max-w-sm mx-auto glass-card p-8 lg:p-10 rounded-2xl">
+                <div className="gradient-text-gold font-display font-bold text-xl mb-3">
+                  ETH Ankara 2026
+                </div>
+                <p className="text-text-secondary text-sm mb-8 leading-relaxed">
+                  Bilet satışları yakında başlayacak. Haberdar olmak için bizi sosyal medyadan takip edin.
+                </p>
+
+                <div className="badge-shimmer inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-eth-purple/[0.06] border border-eth-purple/15 text-eth-purple-light text-sm font-medium">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M8 5v6M5 8h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  Yakında Açılacak
+                </div>
               </div>
             </div>
           </div>
