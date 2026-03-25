@@ -14,116 +14,79 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 30)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useGSAP(
-    () => {
-      gsap.from(navRef.current, {
-        y: -20,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.1,
-      })
-    },
-    { scope: navRef }
-  )
+  useGSAP(() => {
+    gsap.from(navRef.current, { y: -20, opacity: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 })
+  }, { scope: navRef })
 
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
-        scrolled
-          ? 'bg-bg-primary/80 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
-          : 'bg-transparent'
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)]' : 'bg-transparent'
       }`}
       role="navigation"
       aria-label="Ana navigasyon"
     >
-      <Container className="flex items-center justify-between h-16 lg:h-20">
-        <Link
-          href="/"
-          className="font-display text-lg font-bold tracking-tight"
-          aria-label={`${SITE_NAME} ana sayfa`}
-        >
-          <span className="gradient-text">ETH</span>
+      <Container className="flex items-center justify-between h-16 lg:h-[72px]">
+        <Link href="/" className="font-display text-lg font-bold tracking-tight" aria-label={`${SITE_NAME} ana sayfa`}>
+          <span className="text-eth-purple">ETH</span>
           <span className="text-text-primary"> Ankara</span>
         </Link>
 
-        {/* Desktop Nav */}
         <ul className="hidden lg:flex items-center gap-1">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
-              <Link
-                href={item.href}
-                className="px-4 py-2 rounded-xl text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/[0.04] transition-all duration-200"
-              >
+              <Link href={item.href} className="px-4 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-all duration-200">
                 {item.label}
               </Link>
             </li>
           ))}
-          <li className="ml-4">
-            <Link
-              href="#tickets"
-              className="btn-gradient inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
-            >
-              <span>Bilet Al</span>
+          <li className="ml-3">
+            <Link href="#tickets" className="btn-primary inline-flex items-center px-5 py-2.5 rounded-xl text-sm font-semibold">
+              Bilet Al
             </Link>
           </li>
         </ul>
 
-        {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden flex flex-col gap-1.5 p-2.5 rounded-xl hover:bg-white/[0.04] transition-colors"
+          className="lg:hidden p-2 rounded-lg hover:bg-bg-secondary transition-colors"
           onClick={() => setMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
           aria-expanded={isMenuOpen}
         >
-          <span
-            className={`block w-5 h-[1.5px] bg-text-primary transition-all duration-300 origin-center ${isMenuOpen ? 'rotate-45 translate-y-[4.5px]' : ''}`}
-          />
-          <span
-            className={`block w-5 h-[1.5px] bg-text-primary transition-all duration-300 ${isMenuOpen ? 'opacity-0 scale-0' : ''}`}
-          />
-          <span
-            className={`block w-5 h-[1.5px] bg-text-primary transition-all duration-300 origin-center ${isMenuOpen ? '-rotate-45 -translate-y-[4.5px]' : ''}`}
-          />
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            {isMenuOpen ? (
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            ) : (
+              <>
+                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </>
+            )}
+          </svg>
         </button>
       </Container>
 
-      {/* Mobile Menu */}
-      <div
-        className={`lg:hidden absolute top-full left-0 w-full bg-bg-primary/95 backdrop-blur-2xl border-b border-white/[0.06] transition-all duration-400 ${
-          isMenuOpen
-            ? 'max-h-[420px] opacity-100'
-            : 'max-h-0 opacity-0 overflow-hidden'
-        }`}
-      >
-        <Container className="py-6">
+      {/* Mobile */}
+      <div className={`lg:hidden bg-white/95 backdrop-blur-xl border-t border-border transition-all duration-300 ${
+        isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+      }`}>
+        <Container className="py-4">
           <ul className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block px-4 py-3 rounded-xl text-base font-medium text-text-secondary hover:text-text-primary hover:bg-white/[0.04] transition-all duration-200"
-                  onClick={() => setMenuOpen(false)}
-                >
+                <Link href={item.href} onClick={() => setMenuOpen(false)} className="block px-4 py-3 rounded-lg text-base font-medium text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-all">
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li className="mt-4">
-              <Link
-                href="#tickets"
-                className="btn-gradient flex items-center justify-center w-full px-5 py-3.5 rounded-xl text-base font-semibold text-white"
-                onClick={() => setMenuOpen(false)}
-              >
-                <span>Bilet Al</span>
+            <li className="mt-3">
+              <Link href="#tickets" onClick={() => setMenuOpen(false)} className="btn-primary flex items-center justify-center w-full py-3 rounded-xl text-base font-semibold">
+                Bilet Al
               </Link>
             </li>
           </ul>

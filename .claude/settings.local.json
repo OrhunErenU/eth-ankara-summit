@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:ethankara.vercel.app)",
+      "mcp__ca6fbe92-b1a1-4053-a861-f890f2bb7072__create_new_file",
+      "mcp__ca6fbe92-b1a1-4053-a861-f890f2bb7072__use_figma",
+      "WebFetch(domain:stitch.withgoogle.com)"
     ]
   }
 }
